@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Michael Yuen's FAQ Accordion Card solution from Frontend Mentor"
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+
+    <title>Frontend Mentor | FAQ Accordion Card</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --attribution: hsl(230, 25%, 18.8%);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        align-items: center;
+        background: linear-gradient(
+          to bottom,
+          hsl(273, 75%, 66%),
+          hsl(240, 73%, 65%)
+        );
+        color: hsl(238, 29%, 16%);
+        display: flex;
+        flex-direction: column;
+        font-family: "Kumbh Sans", sans-serif;
+        font-size: 12px;
+        justify-content: center;
+        margin: 0;
+      }
+
+      .FaqCard__container {
+        padding: 0 1.5rem;
+        width: 100%;
+      }
+
+      .FaqCard {
+        background-color: white;
+        border-radius: 20px;
+        padding: 100px 1.5rem 50px;
+        position: relative;
+      }
+
+      .FaqCard__image-container--desktop {
+        display: none;
+      }
+
+      .FaqCard__image {
+        position: absolute;
+      }
+
+      .FaqCard__image-container--mobile .FaqCard__image {
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+
+      .FaqCard__image-container--mobile .FaqCard__image--top {
+        left: -32px;
+        transform: translateY(-55%);
+      }
+
+      .FaqCard__image-container--desktop .FaqCard__image {
+        left: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+      }
+
+      .FaqCard__image-container--desktop .FaqCard__image--box {
+        left: -100px;
+        top: 95px;
+        z-index: 3;
+      }
+
+      .FaqCard__image-container--desktop .FaqCard__image--top {
+        left: -90px;
+        z-index: 2;
+      }
+
+      .FaqCard__image-container--desktop .FaqCard__image--bottom {
+        top: -145px;
+        bottom: 0;
+        left: -580px;
+        margin: auto;
+      }
+
+      .FaqCard__title {
+        font-size: 2em;
+        text-align: center;
+      }
+
+      .Accordion {
+        border-bottom: 1px solid hsl(240, 5%, 91%);
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .Accordion:hover .Accordion__title-label {
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .Accordion:hover .Accordion__title-caret {
+        cursor: pointer;
+      }
+
+      .Accordion__title {
+        display: none;
+      }
+
+      .Accordion__title-label {
+        flex-basis: 0;
+        flex-grow: 1;
+        padding: 1rem 0;
+        transition: all .3s ease-in-out;
+      }
+
+      .Accordion__title-caret {
+        padding: 1rem 0;
+        transition: all .3s ease-in-out;
+      }
+
+      .Accordion__body {
+        color: hsl(240, 6%, 50%);
+        margin: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all .3s ease-in-out;
+        width: 100%;
+      }
+
+      .Accordion__title:checked ~ .Accordion__title-label {
+        font-weight: bold;
+      }
+
+      .Accordion__title:checked ~ .Accordion__title-caret {
+        transform: rotate(180deg);
+      }
+
+      .Accordion__title:checked ~ .Accordion__body {
+        max-height: 100vh;
+        margin-bottom: 1rem;
+      }
+
+      @media (min-width: 768px) {
+        body {
+          font-size: 16px;
+        }
+
+        .FaqCard__container {
+          max-width: 500px;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .FaqCard__container {
+          padding: 0;
+          position: relative;
+          max-width: 920px;
+        }
+
+        .FaqCard__image--box {
+          position: absolute;
+          left: -93px;
+          top: 204px;
+          z-index: 3;
+        }
+
+        .FaqCard {
+          min-height: 500px;
+          overflow: hidden;
+          padding: 43px 115px 43px 475px;
+        }
+
+        .FaqCard__title {
+          font-size: 31px;
+          text-align: left;
+        }
+
+        .FaqCard__image-container--mobile {
+          display: none;
+        }
+        .FaqCard__image-container--desktop {
+          display: block;
+        }
+      }
+
+      .Attribution {
+        bottom: 0;
+        color: var(--attribution);
+        font-size: 12px;
+        margin-bottom: 1em;
+        position: fixed;
+        text-align: center;
+      }
+
+      .Attribution a {
+        color: var(--attribution);
+      }
+
+      .Attribution a:focus {
+        border-radius: 3px;
+        box-shadow: 0 0 0 3px #ffeb3b;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="FaqCard__container">
+      <img
+        alt=""
+        class="FaqCard__image FaqCard__image--box"
+        src="./images/illustration-box-desktop.svg"
+      />
+      <article class="FaqCard">
+        <div class="FaqCard__image-container--mobile">
+          <img
+            alt=""
+            class="FaqCard__image FaqCard__image--top"
+            src="./images/illustration-woman-online-mobile.svg"
+          />
+          <img
+            alt=""
+            class="FaqCard__image FaqCard__image--bottom"
+            src="./images/bg-pattern-mobile.svg"
+          />
+        </div>
+        <div class="FaqCard__image-container--desktop">
+          <img
+            alt=""
+            class="FaqCard__image FaqCard__image--top"
+            src="./images/illustration-woman-online-desktop.svg"
+          />
+          <img
+            alt=""
+            class="FaqCard__image FaqCard__image--bottom"
+            src="./images/bg-pattern-desktop.svg"
+          />
+        </div>
+        <h1 class="FaqCard__title">FAQ</h1>
+        <div class="Accordion">
+          <input class="Accordion__title" id="accordion1" name="accordion" type="checkbox"></input>
+          <label class="Accordion__title-label" for="accordion1">How many team members can I invite?</label>
+          <div class="Accordion__title-caret">
+            <img alt="" src="./images/icon-arrow-down.svg" />
+          </div>
+          <p class="Accordion__body">
+            You can invite up to 2 additional users on the Free plan. There is no limit on team members for the Premium plan.
+          </p>
+        </div>
+        <div class="Accordion">
+          <input class="Accordion__title" id="accordion2" name="accordion" type="checkbox"></input>
+          <label class="Accordion__title-label" for="accordion2">What is the maximum file upload size?</label>
+          <div class="Accordion__title-caret">
+            <img alt="" src="./images/icon-arrow-down.svg" />
+          </div>
+          <p class="Accordion__body">
+            No more than 2GB. All files in your account must fit your allotted storage space.
+          </p>
+        </div>
+        <div class="Accordion">
+          <input class="Accordion__title" id="accordion3" name="accordion" type="checkbox"></input>
+          <label class="Accordion__title-label" for="accordion3">How do I reset my password?</label>
+          <div class="Accordion__title-caret">
+            <img alt="" src="./images/icon-arrow-down.svg" />
+          </div>
+          <p class="Accordion__body">
+            Click “Forgot password” from the login page or “Change password” from your profile page. A reset link will be emailed to you.
+          </p>
+        </div>
+        <div class="Accordion">
+          <input class="Accordion__title" id="accordion4" name="accordion" type="checkbox"></input>
+          <label class="Accordion__title-label" for="accordion4">Can I cancel my subscription?</label>
+          <div class="Accordion__title-caret">
+            <img alt="" src="./images/icon-arrow-down.svg" />
+          </div>
+          <p class="Accordion__body">
+            Yes! Send us a message and we’ll process your request no questions asked.
+          </p>
+        </div>
+        <div class="Accordion">
+          <input class="Accordion__title" id="accordion5" name="accordion" type="checkbox"></input>
+          <label class="Accordion__title-label" for="accordion5">Do you provide additional support?</label>
+          <div class="Accordion__title-caret">
+            <img alt="" src="./images/icon-arrow-down.svg" />
+          </div>
+          <p class="Accordion__body">
+            Chat and email support is available 24/7. Phone lines are open during normal business hours.
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <div class="Attribution">
+      Challenge by
+      <a
+        href="https://www.frontendmentor.io?ref=challenge"
+        rel="nofollow noopener noreferrer"
+        target="_blank"
+        >Frontend Mentor</a
+      >. Coded by
+      <a
+        href="https://mikey.baby"
+        rel="nofollow noopener noreferrer"
+        target="_blank"
+        >Michael Yuen</a
+      >.
+    </div>
+  </body>
+</html>
